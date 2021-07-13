@@ -27,4 +27,4 @@ ken_wakui.publisher = "Magajin"
 ken_wakui.gender = "Male"
 ken_wakui.genre = "Syounenn Manga"
 
-print(ken_wakui.manga_list)
+print(ken_wakui)
