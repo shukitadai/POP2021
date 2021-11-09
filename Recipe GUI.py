@@ -32,7 +32,7 @@ root = tk.Tk()
 root.geometry("700x500")
 root.title("Recipe")
 
-x = 1
+x = 2
 def add_ingredient():
     global x
     amount = tk.Entry(root)
@@ -44,11 +44,16 @@ def add_ingredient():
     thing.grid(column = 3, row = x)
     x += 1
     create_ingredient.place_configure(\
-        y = create_ingredient.winfo_y() + 75)
+        y = create_ingredient.winfo_y() + 150)
 
+amountLabel = tk.Label(root,text = "Amount")
+amountLabel.grid(column = 1,row = 1)
 
+unitLabel = tk.Label(root,text = "Unit")
+unitLabel.grid(column = 2, row = 1)
 
-    
+thingLabel = tk.Label(root,text ="ingredient")
+thingLabel.grid(column = 3, row = 1)
 
 saveButton = tk.Button(root,text = "Save")
 saveButton.place(x=700,y=500,anchor = tk.SE)
