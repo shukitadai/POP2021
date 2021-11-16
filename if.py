@@ -1,40 +1,41 @@
-fruit = input("What is your favorite fruit? \n")
+import random
 
-fruits = ["apple","orange","banana","pineapple","grape","grapefruit"]
-
-#print(type(fruits))
-#print(type(fruits[3]))
-#print(len(fruits))
-
-if fruit in fruits:
-    #print("I khow that fruit!!")
-    print("I like " +fruit + "s. too.")
-else:
-    print("I don't khow that fruit!")
-    fruits.append(fruit)
-    print(fruits)
+choices = ["Rock","Paper","Scissors"]
 
 
+playerChoice = ""
+playerScore = 0
 
+computerChoice = ""
+computerScore = 0
 
+print("Let's play rock, paper, scissors!")
+for x in range(1,4):
+    computerChoice = choices[random.randint(0,2)]
+    print("\n")
+    playerChoice = input("Enter [R], [P], or [S] \n")
+    #use if to see who won the match
+    if playerChoice == "R" and computerChoice == "Scissors":
+        playerScore += 1
 
+    if playerChoice == "R" and computerChoice == "Paper":
+        computerScore += 1
+        
+    if playerChoice == "R" and computerChoice == "Rock":
+        playerScore += 0
 
+    if playerChoice == "P" and computerChoice == "Rock":
+        playerScore += 1
 
- 
-#if fruit == "apple":
-    #print("I like apples, too")
+    if playerChoice == "P" and computerChoice == "Paper":
+        playerScore += 0
 
-#elif fruit == "orange":S
-    #print("I like oranges, too")
+    if playerChoice == "P" and computerChoice == "Scissors":
+        computerScore += 1
 
-#elif fruit == "pineapple":
-    #print("I like pineapples, too")
-#else:
-    #print("I don't khow that fruit")
+    if playerChoice == "S" and computerChoice == "Rock":
+        computerScore += 1
 
-
-
-
-
-
-    
+    if playerChoice == "S" and computerChoice == "Paper":
+        playerScore += 1
+        
