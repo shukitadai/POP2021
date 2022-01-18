@@ -48,21 +48,72 @@ class Wolf:
         self.position = pos
         self.age = ag
         self.gender = gen
-        self.enegy = en
+        self.energy = en
         Map[pos.y][pos.x] = "W"
+        
     def Move(self, pos):
-        if self.position.y + position.y >len(Map) or //
+        if self.position.y + pos.y >len(Map) or \
         self.position.y +pos.y < 0:
             return
-        if self.position.x + position.x >= //
-        len(Map[self.position.y + pos.y]) or
-        self.position.x + position.x < 0:
+        
+        if self.position.x + pos.x >= \
+        len(Map[self.position.y + pos.y]) or \
+        self.position.x + pos.x < 0:
+            return
+
+        if self.energy - 3 < 0:
+            return
+        if self.position.x + pos.x == deer.position.x and \
+           self.position.y + pos.y == deer.position.y:
             return
         
+        Map[self.position.y][self.position.x] = "*"
+        self.position.x += pos.x
+        self.position.y += pos.y
+        Map[self.position.y][self.position.x] = "W"
+        
+        self.age += 0.1
+        self.energy -= 3
+
+        if self.position.Distance(deer.position) < 2:
+            print("close!")
+            
+
+class Deer:
+     def __init__(self,pos,gen, en = 100, ag = 3):
+        self.name = "Bambi"
+        self.position = pos
+        self.age = ag
+        self.gender = gen
+        self.energy = en
+        Map[pos.y][pos.x] = "D"
+        
+     def Move(self, pos):
+        if self.position.y + position.y >len(Map) or \
+        self.position.y +pos.y < 0:
+            return
+        
+        if self.position.x + pos.x >= \
+        len(Map[self.position.y + pos.y]) or \
+        self.position.x + pos.x < 0:
+            return
+
+        if self.energy-3 < 0:
+            return
+
+        Map[self.position.y][self.position.x] = "*"
+        self.position.x += pos.x
+        self.position.y += pos.y
+        Map[self.position.y][self.position.x] = "D"
+        
+        self.age += 0.1
+        self.energy -= 3
 
 
 wolf = Wolf(Position(5,5),"M",100,3)
-#print_map(Map)
+deer = Deer(Position(random.randint(0,9), \
+                     random.randint(0,9)),"M",100,5)
+print_map(Map)
 
 command = ""
 command = input("\n")
@@ -72,17 +123,19 @@ while command != "q":
     command = input("\n")
 
     if command == "W":
+        wolf.Move(Position(0,1))
 
     if command == "A":
+        wolf.Move(Position(-1,0))
 
     if command == "S":
-
-    if commamd == "D":
+        wolf.Move(Position(0,-1))
         
+    if command == "D":
+        wolf.Move(Position(1,0))
+        
+    print_map(Map)
     command = input("\n")
-
-
-
 
 
 
