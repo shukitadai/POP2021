@@ -89,7 +89,7 @@ class Deer:
         Map[pos.y][pos.x] = "D"
         
      def Move(self, pos):
-        if self.position.y + position.y >len(Map) or \
+        if self.position.y + pos.y >len(Map) or \
         self.position.y +pos.y < 0:
             return
         
@@ -101,6 +101,11 @@ class Deer:
         if self.energy-3 < 0:
             return
 
+        if self.position.x + pos.x == deer.position.x and \
+           self.position.y + pos.y == deer.position.y:
+            return
+            
+
         Map[self.position.y][self.position.x] = "*"
         self.position.x += pos.x
         self.position.y += pos.y
@@ -108,6 +113,13 @@ class Deer:
         
         self.age += 0.1
         self.energy -= 3
+
+     def Notice(self):
+        if self.position.Distance(wolf.position) <= 4:
+            #print("Danger Danger Danger")
+            return True
+        else:
+            return
 
 
 wolf = Wolf(Position(5,5),"M",100,3)
@@ -122,18 +134,37 @@ while command != "q":
     
     command = input("\n")
 
-    if command == "W":
+    if command == "w":
         wolf.Move(Position(0,1))
 
-    if command == "A":
+    if command == "a":
         wolf.Move(Position(-1,0))
 
-    if command == "S":
+    if command == "s":
         wolf.Move(Position(0,-1))
         
-    if command == "D":
+    if command == "d":
         wolf.Move(Position(1,0))
-        
+
+    if deer.Notice():
+        notice_chance = random.randint(0,9)
+        if notice_chance >= 4:
+            wolf_to_deer = Position(\
+                deer.position.x - wolf.position.x,\
+                deer.position.y - wolf.position.y)
+            print(wolf_to_deer.x)
+            print(wolf_to_deer.y)
+
+            wolf_deer_distance = deer.position.Distance(wolf.position)
+            wolf_to_deer.x = wolf_to_deer.x/wolf_deer_distance
+            wolf_to_deer.y = wolf_to_deer.y/wolf_deer_distance
+            print(wolf_to_deer.x)
+            print(wolf_to_deer.y)
+
+            deer.Move(Position(math.floor(wolf_to_deer.x * 3),\
+                               math.floor(wolf_to_deer.y *3)))
+
+          
     print_map(Map)
     command = input("\n")
 
